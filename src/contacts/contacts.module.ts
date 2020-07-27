@@ -3,6 +3,8 @@ import { ContactsService } from './contacts/contacts.service';
 import { ContactsController } from './contacts/contacts.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Contact } from './contact.entity';
+import { APP_FILTER } from '@nestjs/core';
+import { HttpErrorFilter } from './contacts/http-exception.filter';
 
 @Module({
     imports: [

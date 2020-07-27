@@ -2,24 +2,24 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Contact {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({name: 'id'})
     id: number;
 
-    @Column()
+    @Column({name: 'firstName'})
     firstName: string;
 
-    @Column()
+    @Column({name: 'lastName'})
     lastName: string;
 
-    @Column()
+    @Column({name: 'email'})
     email: string;
 
-    @Column()
+    @Column({name: 'phone'})
     phone: string;
 
-    @Column()
+    @Column({name: 'city'})
     city: string;
 
-    @Column()
+    @Column({name: 'country'})
     country: string;
 }
