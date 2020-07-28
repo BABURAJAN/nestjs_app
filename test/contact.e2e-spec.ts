@@ -34,6 +34,9 @@ describe('Contact Controller (e2e)', () => {
     return request(app.getHttpServer())
       .get('/contacts')
       .expect(200)
+      .expect({
+        data: conService.findAll,
+      });
   });
 
   afterAll(async () => {

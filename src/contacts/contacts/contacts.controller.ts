@@ -26,6 +26,11 @@ export class ContactsController {
       return this.contactsService.getContactById('babu');
     }
 
+    @Post("update")
+    async update(@Body() contactData: Contact): Promise<any> {
+      return await this.contactsService.update(contactData);
+    }
+
     /*@Post("insertWithProcedure/")
     insertInDbWithProcedure(@Body() contactData: Contact): Promise<Contact[]> {
       return this.contactsService.insertWithProcedure(contactData);

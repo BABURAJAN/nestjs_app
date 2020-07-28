@@ -1,34 +1,63 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ContactsService } from './contacts.service';
-jest.mock('./contacts.service');
 import {ContactFactory} from './contact.factory';
+import {Repository, UpdateResult, Any} from 'typeorm';
+import {Contact} from '../contact.entity';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import {findAllContact_Mock_data, createContact_Mock_data} from './mock.contact.data';
 
 describe('ContactsService', () => {
-  let service: ContactsService; 
+  let contactsService: ContactsService; 
+  let repository : Repository<Contact>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ContactsService],
+      imports: [],
+      providers: [
+        ContactsService, 
+        Contact,
+      { 
+        provide: getRepositoryToken(Contact), 
+        useClass: Repository
+      }
+    ],
     }).compile();
 
-    service = module.get(ContactsService);
+    contactsService = module.get<ContactsService>(ContactsService);
+    repository = module.get<Repository<Contact>>(getRepositoryToken(Contact));
   });
 
-  it('should add new contact ', async () => {
-    const acc = ContactFactory.build();
-    jest.spyOn(service, 'create').mockResolvedValue(acc);
-    expect(await service.create(ContactFactory.build())).toEqual(acc);
+  it('should be defined', () => {
+    expect(contactsService).toBeDefined();
   });
 
-  it('should return all contact', async () => {
-    const con = ContactFactory.buildList(10)
-    jest.spyOn(service, 'findAll').mockResolvedValue(con);
-    expect(await service.findAll()).toEqual(con);
+
+  it('should find all contact ', async () => {
+    jest.spyOn(repository, 'find').mockResolvedValueOnce(findAllContact_Mock_data);    
+    const finalResult = await contactsService.findAll();  
+    expect(finalResult).toEqual(findAllContact_Mock_data);
+
   });
 
-  it('should return contact filtered by id ', async () => {
-    const con = ContactFactory.build();
-    jest.spyOn(service, 'findById').mockResolvedValue(con);
-    expect(await service.findById('babu')).toEqual(con);
-  })
+  it('should create contact ', async () => {
+    jest.spyOn(repository, 'save').mockResolvedValueOnce(createContact_Mock_data);    
+    const finalResult = await contactsService.create(createContact_Mock_data);  
+    expect(finalResult).toEqual(createContact_Mock_data);
+
+  });
+  
+  it('should return one contact on the basis of id ', async () => {
+    jest.spyOn(repository, 'findOne').mockResolvedValueOnce(createContact_Mock_data);    
+    const finalResult = await contactsService.findById(2);
+    expect(finalResult).toEqual(createContact_Mock_data);
+
+  });
+
+  it('should update contact on the basis of name ', async () => {
+    jest.spyOn(repository, 'update').mockResolvedValueOnce();    
+    const finalResult = await contactsService.findById(2);
+    expect(finalResult).toEqual(createContact_Mock_data);
+
+  });
+  
 });

@@ -27,7 +27,6 @@ describe('AppController', () => {
     });
   });
 
-
   describe(' find contact by one Id', () => {
     it('should return Contacts', async () => {
     jest.spyOn(contactsService, 'findById').mockImplementation();

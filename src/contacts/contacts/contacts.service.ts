@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Options } from '@nestjs/common';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Contact } from '../contact.entity';
@@ -23,26 +23,21 @@ export class ContactsService {
     }
 
     async  create(contact:Contact): Promise<Contact> {
-       
-        return await this.contactRepository.save(contact);
-  
+         return await this.contactRepository.save(contact);
+    }
+        //,{reload:false}
         /*try{
             return await this.contactRepository.save(contact);
           }catch(exception){
             console.log("  00000000000000000  ",exception.message);
             throw new HttpException('error while creating contact in Service !!!', HttpStatus.BAD_REQUEST);
           }*/
-    }
 
     async update(contact: Contact): Promise<any> {
-        const ret = await this.contactRepository.update(contact.id, contact);
-
+        const ret = await this.contactRepository.update(contact.id,contact);
         return contact;
     }
 
-    async delete(id): Promise<DeleteResult> {
-        return await this.contactRepository.delete(id);
-    }
 
     async getContactById(fName): Promise<Contact>{ 
         

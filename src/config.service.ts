@@ -28,7 +28,7 @@ export const config = () => ({
     database: process.env.TYPEORM_DATABASE,
     //port: Number.parseInt(process.env.TYPEORM_PORT),
    // entities: ['__dirname/**/*.entity{.ts,.js}'],
-    synchronize: true,
+    synchronize: false,
     autoLoadEntities: true,
     options:{
       enableArithAbort:true,
