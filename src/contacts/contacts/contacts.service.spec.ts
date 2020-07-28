@@ -54,8 +54,8 @@ describe('ContactsService', () => {
   });
 
   it('should update contact on the basis of name ', async () => {
-    jest.spyOn(repository, 'update').mockResolvedValueOnce();    
-    const finalResult = await contactsService.findById(2);
+    jest.spyOn(repository, 'update').moc
+    const finalResult = await contactsService.update(createContact_Mock_data);
     expect(finalResult).toEqual(createContact_Mock_data);
 
   });
