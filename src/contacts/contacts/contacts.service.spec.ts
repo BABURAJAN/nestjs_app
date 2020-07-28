@@ -4,7 +4,8 @@ import {ContactFactory} from './contact.factory';
 import {Repository, UpdateResult, Any} from 'typeorm';
 import {Contact} from '../contact.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import {findAllContact_Mock_data, createContact_Mock_data} from './mock.contact.data';
+import {findAllContact_Mock_data, createContact_Mock_data,
+       updatedContact_Mock_data} from './mock.contact.data';
 
 describe('ContactsService', () => {
   let contactsService: ContactsService; 
@@ -54,10 +55,23 @@ describe('ContactsService', () => {
   });
 
   it('should update contact on the basis of name ', async () => {
-    jest.spyOn(repository, 'update').moc
-    const finalResult = await contactsService.update(createContact_Mock_data);
-    expect(finalResult).toEqual(createContact_Mock_data);
+    jest.spyOn(repository, 'update').mockReturnThis();
+    const finalResult = await contactsService.update(updatedContact_Mock_data);
+    expect(finalResult).toEqual(updatedContact_Mock_data);
 
+  });
+
+
+  it('should return one contact on the basis of name ', async () => {
+    jest.spyOn(repository, 'findOne').mockResolvedValueOnce(createContact_Mock_data);    
+    const finalResult = await contactsService.getContactById('babu');
+    expect(finalResult).toEqual(createContact_Mock_data);
+  });
+
+  it('should return one contact which is inserted with procedure ', async () => {
+    jest.spyOn(repository, 'query').mockResolvedValueOnce(createContact_Mock_data);    
+    const finalResult = await contactsService.insertWithProcedure(createContact_Mock_data);
+    expect(finalResult).toEqual(createContact_Mock_data);
   });
   
 });

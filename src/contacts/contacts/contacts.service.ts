@@ -33,20 +33,18 @@ export class ContactsService {
             throw new HttpException('error while creating contact in Service !!!', HttpStatus.BAD_REQUEST);
           }*/
 
-    async update(contact: Contact): Promise<any> {
+    async update(contact: Contact): Promise<Contact> {
         const ret = await this.contactRepository.update(contact.id,contact);
         return contact;
     }
 
-
     async getContactById(fName): Promise<Contact>{ 
-        
         return await this.contactRepository.findOne({
             firstName:fName
         });
     }
 
-    async insertWithProcedure(contact: Contact): Promise<Contact[]>{
+    async insertWithProcedure(contact: Contact): Promise<Contact>{
         return await this.contactRepository.query("test_procedure_insert @firstName='" + contact.firstName + 
         "', @lastName='"+contact.lastName+
         "', @email='"+contact.email+
