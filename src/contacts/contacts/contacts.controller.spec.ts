@@ -2,7 +2,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ContactsController } from './contacts.controller';
 import { ContactsService } from './contacts.service';
 jest.mock('./contacts.service');
-import {ContactFactory} from './contact.factory';
+
+import {createContact_Mock_model_data} from './mock.contact.data';
 
 describe('AppController', () => {
   let module: TestingModule, contactsService: ContactsService, contactsController: ContactsController;
@@ -27,19 +28,18 @@ describe('AppController', () => {
     });
   });
 
-  describe(' find contact by one Id', () => {
+  /*describe(' find contact by one Id', () => {
     it('should return Contacts', async () => {
     jest.spyOn(contactsService, 'findById').mockImplementation();
       expect(contactsService.findById('babu'));
     });
-  });
+  });*/
 
   describe(' create new contact ', () => {
     it('should return Contacts', async () => {
-      const acc = ContactFactory.build();
      
     jest.spyOn(contactsService, 'create').mockImplementation();
-      expect(contactsService.create(acc))
+      expect(contactsService.create(createContact_Mock_model_data))
     });
   });
 

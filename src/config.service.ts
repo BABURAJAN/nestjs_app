@@ -1,5 +1,5 @@
 import * as path from 'path';
-import * as dotenv from 'dotenv';
+
 
 const baseDir = path.join(__dirname);
 const entitiesPath = `${baseDir}${process.env.TYPEORM_ENTITIES}`;

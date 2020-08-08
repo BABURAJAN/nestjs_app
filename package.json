@@ -18,7 +18,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "bundle": "webpack",
+    "web": "webpack-dev-server"
   },
   "dependencies": {
     "@nestjs/common": "^7.0.0",
@@ -29,11 +31,13 @@
     "config.ts": "^1.0.0",
     "mssql": "^6.2.0",
     "mysql": "^2.18.1",
+    "nforce": "^1.12.2",
     "node-mssql": "0.0.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4",
-    "typeorm": "^0.2.25"
+    "typeorm": "^0.2.25",
+    "webpack-node-externals": "^2.5.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",
@@ -52,10 +56,11 @@
     "prettier": "^1.19.1",
     "supertest": "^4.0.2",
     "ts-jest": "26.1.0",
-    "ts-loader": "^6.2.1",
+    "ts-loader": "^6.2.2",
     "ts-node": "^8.6.2",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.7.4"
+    "typescript": "^3.9.7",
+    "webpack-cli": "^3.3.12"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -69,6 +74,21 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx}",
+      "!**/node_modules/**",
+      "!**/coverage/**",
+      "!**/app.module.ts",
+      "!**/config.service.ts",
+      "!**/database.config.ts",
+      "!**/main.ts",
+      "!**/contacts.module.ts",
+      "!**/ContactModelToEntityMapper.ts",
+      "!**/http-exception.filter.ts",
+      "!**/modelToEntityMapper.ts",
+      "!**/contact.factory.ts"
+    ]
   }
 }

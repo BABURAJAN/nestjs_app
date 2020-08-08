@@ -1,9 +1,9 @@
 import { Controller, Get, UseFilters } from '@nestjs/common';
 import { Contact } from '../contact.entity';
 import { ContactsService } from './contacts.service';
-import { Post,Put, Delete, Body, Param } from  '@nestjs/common';
-import {  HttpStatus, HttpException} from '@nestjs/common';
-import {HttpErrorFilter} from './http-exception.filter';
+import { Post, Body } from  '@nestjs/common';
+import { HttpException} from '@nestjs/common';
+import { ContactModel } from './contact.model';
 
 @Controller('contacts')
 export class ContactsController {
@@ -21,10 +21,10 @@ export class ContactsController {
       return this.contactsService.find(Number(id));
     }  */
 
-    @Post("findById")
+   /* @Post("findById")
     findById(): Promise<Contact> {
       return this.contactsService.getContactById('babu');
-    }
+    }*/
 
     @Post("update")
     async update(@Body() contactData: Contact): Promise<any> {
@@ -38,8 +38,8 @@ export class ContactsController {
     
     @Post('create')
     // @UseFilters(new HttpErrorFilter())
-     async create(@Body() contactData: Contact): Promise<any> {
-     return await this.contactsService.create(contactData);
+     async create(@Body() contactModel: ContactModel): Promise<ContactModel> {
+     return await this.contactsService.create(contactModel);
     /* try{
         return await this.contactsService.create(contactData);
       }catch(exception){
@@ -51,9 +51,9 @@ export class ContactsController {
 
     @Post('create2')
     //@UseFilters(new HttpErrorFilter())
-    async create2(@Body() contactData: Contact): Promise<any> {
+    async create2(@Body() ContactModel: ContactModel): Promise<any> {
      try{
-        return await this.contactsService.create(contactData);
+        return await this.contactsService.create(ContactModel);
      }catch(exception){
         console.log('===========',exception.name);
         throw new HttpException(exception, 400);
