@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ContactsService } from './contacts.service';
 import {Repository} from 'typeorm';
-import {Contact} from '../contact.entity';
+import {Contact_1} from '../contact_1.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import {findAllContact_Mock_data, createContact_Mock_data,
        updatedContact_Mock_data, createContact_Mock_model_data, mapModelToEntity, mapEntityToModel} from './mock.contact.data';
@@ -11,7 +11,7 @@ import {ContactEntityToModelMapper} from './ContactEntityToModelMapper';
 
 describe('ContactsService', () => {
   let contactsService: ContactsService;
-  let repository : Repository<Contact>;
+  let repository : Repository<Contact_1>;
   let contactModelToEntityMapper: ContactModelToEntityMapper;
   let contactEntityToModelMapper: ContactEntityToModelMapper;
 
@@ -20,18 +20,18 @@ describe('ContactsService', () => {
       imports: [],
       providers: [
         ContactsService, 
-        Contact,
+        Contact_1,
         ContactModelToEntityMapper,
         ContactEntityToModelMapper,
       { 
-        provide: getRepositoryToken(Contact), 
+        provide: getRepositoryToken(Contact_1), 
         useClass: Repository
       }
     ],
     }).compile();
 
     contactsService = module.get<ContactsService>(ContactsService);
-    repository = module.get<Repository<Contact>>(getRepositoryToken(Contact));
+    repository = module.get<Repository<Contact_1>>(getRepositoryToken(Contact_1));
     contactModelToEntityMapper = module.get<ContactModelToEntityMapper>(ContactModelToEntityMapper);
     contactEntityToModelMapper = module.get<ContactEntityToModelMapper>(ContactEntityToModelMapper);
   });

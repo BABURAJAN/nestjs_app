@@ -1,8 +1,8 @@
 import {ContactModel} from './contact.model';
-import {Contact} from '../contact.entity';
+import {Contact_1} from '../contact_1.entity';
 
 export class ContactEntityToModelMapper{
-    async mapEntityToModel(contactEntity: Contact): Promise<ContactModel> {
+    async mapEntityToModel(contactEntity: Contact_1): Promise<ContactModel> {
         const contactModel =  new ContactModel();
         contactModel.id_ = contactEntity.id;
         contactModel.n_id_ = contactEntity.n_id;

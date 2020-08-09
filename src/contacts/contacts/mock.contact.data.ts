@@ -1,7 +1,7 @@
-import {Contact} from '../contact.entity';
+import {Contact_1} from '../contact_1.entity';
 import { ContactModel } from './contact.model';
 
-export const findAllContact_Mock_data: Contact[] = [{
+export const findAllContact_Mock_data: Contact_1[] = [{
     "id":0,
     "n_id":1,
     "firstName":"babu",
@@ -12,7 +12,7 @@ export const findAllContact_Mock_data: Contact[] = [{
     "country":"india"
 }]
 
-export const createContact_Mock_data: Contact = {
+export const createContact_Mock_data: Contact_1 = {
     "id":0,
     "n_id":1,
     "firstName":"babu",
@@ -35,7 +35,7 @@ export const createContact_Mock_model_data: ContactModel = {
 }
 
 
-export const updatedContact_Mock_data: Contact = {
+export const updatedContact_Mock_data: Contact_1 = {
     "id":0,
     "n_id":1,
     "firstName":"babu",
@@ -48,7 +48,7 @@ export const updatedContact_Mock_data: Contact = {
 
 
 
-export const mapModelToEntity: Contact =  {
+export const mapModelToEntity: Contact_1 =  {
     "id":0,
     "n_id": 1,
     "firstName": "babu",

@@ -1,9 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('contact')
-export class Contact {
+@Entity('contact_1')
+export class Contact_1 {
     @PrimaryGeneratedColumn({name: 'id'})
     id: number;
+
+    @Column({name: 'n_id'})
+    n_id: number;
 
     @Column({name: 'firstName'})
     firstName: string;

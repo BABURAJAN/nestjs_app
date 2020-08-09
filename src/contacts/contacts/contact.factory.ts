@@ -1,10 +1,10 @@
-import {Contact} from '../contact.entity';
+import {Contact_1} from '../contact_1.entity';
 
 export class ContactFactory {
     make: 'new Contact';
   
     public static build(opts: any = {}) {
-      return new Contact();
+      return new Contact_1();
     }
   
     public static buildList(length: number, opts: any = {}) {

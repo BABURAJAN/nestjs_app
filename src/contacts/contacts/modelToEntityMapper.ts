@@ -1,5 +1,5 @@
 import {ContactModel} from './contact.model'
-import {Contact} from '../contact.entity'
+import {Contact_1} from '../contact_1.entity'
 
 
 export class ModelToEntityMapper{
